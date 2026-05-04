@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weekly Lesson Preparation & Evidence Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 10px;
+      background: #f4f4f4;
+    }
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #000;
+      padding: 10px 16px;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+    .header-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .logo-box img {
+      max-height: 40px;
+      width: auto;
+      display: block;
+    }
+    .header-text {
+      flex: 1;
+      text-align: center;
+    }
+    .header-title {
+      font-weight: bold;
+      font-size: 16px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .sub-title {
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+    .field-label {
+      font-weight: bold;
+      min-width: 80px;
+      white-space: nowrap;
+    }
+    .text-input,
+    .line-input {
+      flex: 1;
+      border: none;
+      border-bottom: 1px solid #000;
+      padding: 2px;
+      font: inherit;
+      background: transparent;
+    }
+    .date-select {
+      flex: 1;
+      border: none;
+      border-bottom: 1px solid #000;
+      padding: 2px 4px;
+      font: inherit;
+      background: transparent;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      background-size: 14px;
+      padding-right: 24px;
+    }
+    .date-select:focus {
+      outline: none;
+      border-bottom: 2px solid #0073e6;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 3px;
+      text-transform: none;
+    }
+    .textarea-block {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid #000;
+      padding: 4px;
+      font: inherit;
+      resize: vertical;
+    }
+    .goals-list {
+      margin-left: 18px;
+      margin-top: 2px;
+      margin-bottom: 6px;
+    }
+    .goals-list li {
+      margin-bottom: 4px;
+    }
+    .checkbox-row {
+      margin-bottom: 3px;
+      font-size: 11.5px;
+    }
+    .checkbox-row label {
+      margin-right: 12px;
+      white-space: nowrap;
+    }
+    .day-block {
+      border: 1px solid #000;
+      padding: 6px 8px;
+      margin-bottom: 6px;
+    }
+    .day-block-title {
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+    .print-note {
+      font-size: 10px;
+      color: #555;
+      margin-top: 6px;
+    }
+
+    /* ============================================
+       TOOLBAR STYLES
+       ============================================ */
+    .toolbar {
+      max-width: 780px;
+      margin: 0 auto 10px auto;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 10px 14px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .toolbar-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .toolbar-row:last-child {
+      margin-bottom: 0;
+    }
+    .toolbar-section {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-right: 12px;
+      border-right: 1px solid #ddd;
+    }
+    .toolbar-section:last-child {
+      border-right: none;
+    }
+    .toolbar-label {
+      font-size: 11px;
+      font-weight: bold;
+      color: #555;
+      text-transform: uppercase;
+    }
+    .toolbar-btn {
+      padding: 6px 12px;
+      font-size: 11px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background: #f8f8f8;
+      color: #333;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+    .toolbar-btn:hover {
+      background: #e8e8e8;
+      border-color: #999;
+    }
+    .toolbar-btn.primary {
+      background: #0073e6;
+      color: #fff;
+      border-color: #005bb5;
+    }
+    .toolbar-btn.primary:hover {
+      background: #005bb5;
+    }
+    .toolbar-btn.success {
+      background: #28a745;
+      color: #fff;
+      border-color: #1e7e34;
+    }
+    .toolbar-btn.success:hover {
+      background: #1e7e34;
+    }
+    .toolbar-btn.warning {
+      background: #ffc107;
+      color: #333;
+      border-color: #d39e00;
+    }
+    .toolbar-btn.warning:hover {
+      background: #d39e00;
+    }
+    .toolbar-btn.danger {
+      background: #dc3545;
+      color: #fff;
+      border-color: #c82333;
+    }
+    .toolbar-btn.danger:hover {
+      background: #c82333;
+    }
+    .toolbar-btn .icon {
+      font-size: 14px;
+    }
+
+    /* Status indicator */
+    .save-status {
+      font-size: 10px;
+      color: #666;
+      margin-left: auto;
+      padding-left: 12px;
+    }
+    .save-status.saved {
+      color: #28a745;
+    }
+    .save-status.saving {
+      color: #ffc107;
+    }
+
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 12px 20px;
+      background: #333;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 13px;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      max-width: 300px;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .toast.success {
+      background: #28a745;
+    }
+    .toast.error {
+      background: #dc3545;
+    }
+    .toast.info {
+      background: #17a2b8;
+    }
+
+    /* Modal styles */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9998;
+    }
+    .modal-overlay.show {
+      display: flex;
+    }
+    .modal {
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .modal-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #ddd;
+    }
+    .modal-content {
+      margin-bottom: 16px;
+    }
+    .modal-buttons {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .saved-weeks-list {
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .saved-week-item {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .saved-week-item:last-child {
+      border-bottom: none;
+    }
+    .saved-week-item:hover {
+      background: #f5f5f5;
+    }
+    .saved-week-item .week-info {
+      flex: 1;
+    }
+    .saved-week-item .week-date {
+      font-weight: bold;
+      font-size: 13px;
+    }
+    .saved-week-item .week-teacher {
+      font-size: 11px;
+      color: #666;
+    }
+    .saved-week-item .delete-btn {
+      background: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 4px 8px;
+      font-size: 10px;
+      cursor: pointer;
+    }
+    .saved-week-item .delete-btn:hover {
+      background: #c82333;
+    }
+
+    .no-weeks-message {
+      padding: 20px;
+      text-align: center;
+      color: #666;
+      font-style: italic;
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 10mm 10mm 10mm;
+      }
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .page {
+        border: none;
+        margin: 0;
+        padding: 5mm 6mm;
+        max-width: none;
+      }
+      .toolbar {
+        display: none;
+      }
+      .date-select {
+        background-image: none;
+      }
+      .toast, .modal-overlay {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .toolbar-section {
+        border-right: none;
+        width: 100%;
+        padding-right: 0;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #eee;
+      }
+      .toolbar-section:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .toolbar-btn {
+        padding: 8px 10px;
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
+<!-- Modal for saved weeks -->
+<div class="modal-overlay" id="savedWeeksModal">
+  <div class="modal">
+    <div class="modal-title">📋 Load Previous Week</div>
+    <div class="modal-content">
+      <p style="font-size: 12px; color: #666; margin-bottom: 10px;">
+        Select a previously saved week to copy its data into the current form:
+      </p>
+      <div class="saved-weeks-list" id="savedWeeksList">
+        <!-- Populated by JavaScript -->
+      </div>
+    </div>
+    <div class="modal-buttons">
+      <button class="toolbar-btn" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toolbar -->
+<div class="toolbar">
+  <div class="toolbar-row">
+    <!-- Auto-Save Section -->
+    <div class="toolbar-section">
+      <span class="toolbar-label">💾 Save:</span>
+      <button class="toolbar-btn success" onclick="saveCurrentWeek()">
+        <span class="icon">📥</span> Save This Week
+      </button>
+      <button class="toolbar-btn danger" onclick="clearForm()">
+        <span class="icon">🗑️</span> Clear Form
+      </button>
+    </div>
+
+    <!-- Duplicate Section -->
+    <div class="toolbar-section">
+      <span class="toolbar-label">📋 Copy:</span>
+      <button class="toolbar-btn warning" onclick="showSavedWeeks()">
+        <span class="icon">📂</span> Load Previous Week
+      </button>
+    </div>
+
+    <!-- Status -->
+    <div class="save-status" id="saveStatus">
+      Auto-save enabled
+    </div>
+  </div>
+
+  <div class="toolbar-row">
+    <!-- Export Section -->
+    <div class="toolbar-section">
+      <span class="toolbar-label">📤 Export:</span>
+      <button class="toolbar-btn primary" onclick="window.print();">
+        <span class="icon">🖨️</span> Print / PDF
+      </button>
+      <button class="toolbar-btn" onclick="emailForm()">
+        <span class="icon">✉️</span> Email
+      </button>
+      <button class="toolbar-btn" onclick="downloadAsText()">
+        <span class="icon">📄</span> Download .txt
+      </button>
+      <button class="toolbar-btn" onclick="copyToClipboard()">
+        <span class="icon">📋</span> Copy to Clipboard
+      </button>
+    </div>
+
+    <!-- File Slots Section -->
+    <div class="toolbar-section">
+      <span class="toolbar-label">📁 File:</span>
+      <select id="fileSlotSelect" class="date-select" style="max-width: 140px;">
+        <option value="1">File 1</option>
+        <option value="2">File 2</option>
+        <option value="3">File 3</option>
+        <option value="4">File 4</option>
+        <option value="5">File 5</option>
+        <option value="6">File 6</option>
+        <option value="7">File 7</option>
+        <option value="8">File 8</option>
+      </select>
+      <button class="toolbar-btn success" onclick="saveToSlot()">
+        <span class="icon">💾</span> Save to Slot
+      </button>
+      <button class="toolbar-btn warning" onclick="loadFromSlot()">
+        <span class="icon">📂</span> Load Slot
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="formPage">
+  <!-- Header with logo -->
+  <div class="header-wrap">
+    <div class="logo-box">
+      <img src="links-logo.png" alt="LINKS English Language Institute Logo">
+    </div>
+    <div class="header-text">
+      <div class="header-title">LINKS ENGLISH LANGUAGE INSTITUTE</div>
+      <div class="sub-title">Weekly Lesson Preparation &amp; Evidence Form</div>
+    </div>
+  </div>
+
+  <!-- Basic Info -->
+  <div class="row">
+    <div class="field-label">Teacher Name:</div>
+    <input class="text-input" type="text" id="teacherName" spellcheck="true" autocorrect="on" autocapitalize="words">
+  </div>
+
+  <div class="row">
+    <div class="field-label">Week of:</div>
+    <select class="date-select" id="weekSelect">
+      <!-- Options populated by JavaScript -->
+    </select>
+  </div>
+
+  <div class="row">
+    <div class="field-label">Level:</div>
+    <input class="text-input" type="text" id="level" spellcheck="true" autocorrect="on" autocapitalize="words">
+  </div>
+
+  <!-- Weekly Learning Goals -->
+  <div class="section-title">Weekly Learning Goals</div>
+  <div>By the end of this week, students will be able to:</div>
+  <ol class="goals-list">
+    <li><input class="line-input" type="text" id="goal1" spellcheck="true" autocorrect="on" autocapitalize="sentences"></li>
+    <li><input class="line-input" type="text" id="goal2" spellcheck="true" autocorrect="on" autocapitalize="sentences"></li>
+    <li><input class="line-input" type="text" id="goal3" spellcheck="true" autocorrect="on" autocapitalize="sentences"></li>
+  </ol>
+
+  <!-- Evidence of Preparation -->
+  <div class="section-title">Evidence of Preparation</div>
+
+  <div class="checkbox-row">
+    Lesson planning completed in advance?
+    <label><input type="radio" name="planningComplete" id="planningYes" value="yes"> Yes</label>
+    <label><input type="radio" name="planningComplete" id="planningNo" value="no"> No</label>
+  </div>
+
+  <div class="section-title" style="margin-top: 4px; font-weight: normal;">Textbook units/pages prepared:</div>
+  <textarea class="textarea-block" id="textbookUnits" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+  <div class="section-title" style="margin-top: 4px; font-weight: normal;">Lesson plan notes / outline:</div>
+  <textarea class="textarea-block" id="lessonNotes" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+  <!-- Supplemental / Extra Materials Used -->
+  <div class="section-title">Supplemental / Extra Materials Used</div>
+
+  <div class="checkbox-row">
+    <label><input type="checkbox" id="matWorksheets"> Teacher-created worksheets</label>
+  </div>
+  <div class="checkbox-row">
+    <label><input type="checkbox" id="matAuthentic"> Authentic materials (articles, menus, ads, forms, etc.)</label>
+  </div>
+  <div class="checkbox-row">
+    <label><input type="checkbox" id="matVideo"> Video / Audio (YouTube, podcast, listening track)</label>
+  </div>
+  <div class="checkbox-row">
+    <label><input type="checkbox" id="matGames"> Games / Speaking cards / Role-plays</label>
+  </div>
+  <div class="checkbox-row">
+    <label><input type="checkbox" id="matOnline"> Online tools / apps</label>
+  </div>
+
+  <div class="section-title" style="margin-top: 4px; font-weight: normal;">Details / links / file names:</div>
+  <textarea class="textarea-block" id="materialDetails" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+  <!-- Weekly Breakdown (Mon–Thu) -->
+  <div class="section-title">Weekly Breakdown (Mon–Thu)</div>
+
+  <!-- Monday -->
+  <div class="day-block">
+    <div class="day-block-title">Monday</div>
+    <div class="section-title" style="font-weight: normal;">Objective:</div>
+    <textarea class="textarea-block" id="monObjective" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+    <div class="section-title" style="font-weight: normal;">Main Activities:</div>
+    <textarea class="textarea-block" id="monActivities" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+    <div class="section-title" style="font-weight: normal;">Extra Material Used (if any):</div>
+    <textarea class="textarea-block" id="monMaterials" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+  </div>
+
+  <!-- Tuesday -->
+  <div class="day-block">
+    <div class="day-block-title">Tuesday</div>
+    <div class="section-title" style="font-weight: normal;">Objective:</div>
+    <textarea class="textarea-block" id="tueObjective" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+    <div class="section-title" style="font-weight: normal;">Main Activities:</div>
+    <textarea class="textarea-block" id="tueActivities" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+    <div class="section-title" style="font-weight: normal;">Extra Material Used (if any):</div>
+    <textarea class="textarea-block" id="tueMaterials" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+  </div>
+
+  <!-- Wednesday -->
+  <div class="day-block">
+    <div class="day-block-title">Wednesday</div>
+    <div class="section-title" style="font-weight: normal;">Objective:</div>
+    <textarea class="textarea-block" id="wedObjective" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+    <div class="section-title" style="font-weight: normal;">Main Activities:</div>
+    <textarea class="textarea-block" id="wedActivities" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+    <div class="section-title" style="font-weight: normal;">Extra Material Used (if any):</div>
+    <textarea class="textarea-block" id="wedMaterials" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+  </div>
+
+  <!-- Thursday -->
+  <div class="day-block">
+    <div class="day-block-title">Thursday</div>
+    <div class="section-title" style="font-weight: normal;">Objective:</div>
+    <textarea class="textarea-block" id="thuObjective" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+    <div class="section-title" style="font-weight: normal;">Main Activities:</div>
+    <textarea class="textarea-block" id="thuActivities" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+    <div class="section-title" style="font-weight: normal;">Extra Material Used (if any):</div>
+    <textarea class="textarea-block" id="thuMaterials" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+  </div>
+
+  <!-- Primary Skill Focus -->
+  <div class="section-title">Primary Skill Focus</div>
+  <div class="checkbox-row">
+    <label><input type="checkbox" id="skillSpeaking"> Speaking</label>
+    <label><input type="checkbox" id="skillListening"> Listening</label>
+    <label><input type="checkbox" id="skillReading"> Reading</label>
+    <label><input type="checkbox" id="skillWriting"> Writing</label>
+  </div>
+  <div class="checkbox-row">
+    <label><input type="checkbox" id="skillGrammar"> Grammar</label>
+    <label><input type="checkbox" id="skillPronunciation"> Pronunciation</label>
+    <label><input type="checkbox" id="skillVocabulary"> Vocabulary</label>
+  </div>
+
+  <!-- Assessment & Monitoring -->
+  <div class="section-title">Assessment &amp; Monitoring</div>
+  <div>How was student learning checked this week?</div>
+  <div class="checkbox-row" style="margin-top: 2px;">
+    <label><input type="checkbox" id="assessObservation"> Observation</label>
+    <label><input type="checkbox" id="assessSpeaking"> Speaking task</label>
+    <label><input type="checkbox" id="assessQuiz"> Quiz</label>
+    <label><input type="checkbox" id="assessWriting"> Writing task</label>
+    <label><input type="checkbox" id="assessParticipation"> Participation</label>
+  </div>
+
+  <div class="section-title" style="font-weight: normal; margin-top: 4px;">Common errors or challenges observed:</div>
+  <textarea class="textarea-block" id="commonErrors" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+  <!-- Weekly Reflection -->
+  <div class="section-title">Weekly Reflection (Required)</div>
+
+  <div class="section-title" style="font-weight: normal;">What worked well this week?</div>
+  <textarea class="textarea-block" id="workedWell" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+  <div class="section-title" style="font-weight: normal;">What adjustments are needed for next week?</div>
+  <textarea class="textarea-block" id="adjustments" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+  <div class="section-title" style="font-weight: normal;">Notes for academic coordinator / next instructor:</div>
+  <textarea class="textarea-block" id="coordinatorNotes" spellcheck="true" autocorrect="on" autocapitalize="sentences"></textarea>
+
+  <div class="print-note">
+    Use the toolbar buttons above to save, load, print, or export your form.
+  </div>
+</div>
+
+<script>
+  // ============================================
+  // FORM FIELD IDS - All fields to save/load
+  // ============================================
+  const textFields = [
+    'teacherName', 'weekSelect', 'level',
+    'goal1', 'goal2', 'goal3',
+    'textbookUnits', 'lessonNotes', 'materialDetails',
+    'monObjective', 'monActivities', 'monMaterials',
+    'tueObjective', 'tueActivities', 'tueMaterials',
+    'wedObjective', 'wedActivities', 'wedMaterials',
+    'thuObjective', 'thuActivities', 'thuMaterials',
+    'commonErrors', 'workedWell', 'adjustments', 'coordinatorNotes'
+  ];
+
+  const radioFields = ['planningYes', 'planningNo'];
+
+  const checkboxFields = [
+    'matWorksheets', 'matAuthentic', 'matVideo', 'matGames', 'matOnline',
+    'skillSpeaking', 'skillListening', 'skillReading', 'skillWriting',
+    'skillGrammar', 'skillPronunciation', 'skillVocabulary',
+    'assessObservation', 'assessSpeaking', 'assessQuiz', 'assessWriting', 'assessParticipation'
+  ];
+
+  let currentWeekIndex = 0;
+
+  // ============================================
+  // TOAST NOTIFICATION
+  // ============================================
+  function showToast(message, type = 'info') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = 'toast ' + type + ' show';
+
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  // ============================================
+  // WEEK DROPDOWN POPULATION
+  // ============================================
+  function populateWeekDropdown() {
+    const select = document.getElementById('weekSelect');
+    const today = new Date();
+
+    const currentDay = today.getDay();
+    const diffToMonday = currentDay === 0 ? -6 : 1 - currentDay;
+    const currentMonday = new Date(today);
+    currentMonday.setDate(today.getDate() + diffToMonday);
+    currentMonday.setHours(0, 0, 0, 0);
+
+    const weeksBack = 8;
+    const weeksForward = 12;
+
+    for (let i = -weeksBack; i <= weeksForward; i++) {
+      const weekMonday = new Date(currentMonday);
+      weekMonday.setDate(currentMonday.getDate() + (i * 7));
+
+      const option = document.createElement('option');
+      option.value = formatDateValue(weekMonday);
+      option.textContent = formatDateDisplay(weekMonday);
+
+      if (i === 0) {
+        option.selected = true;
+        currentWeekIndex = select.options.length;
+      }
+
+      select.appendChild(option);
+    }
+  }
+
+  function formatDateValue(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  function formatDateDisplay(date) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const dateStr = date.toLocaleDateString('en-US', options);
+    return `Week of ${dateStr}`;
+  }
+
+  // ============================================
+  // 1. AUTO-SAVE FUNCTIONALITY
+  // ============================================
+  const AUTOSAVE_KEY    = 'lessonForm_autosave';
+  const SAVED_WEEKS_KEY = 'lessonForm_savedWeeks';
+  const SLOT_KEY_BASE   = 'lessonForm_slot_';
+  let autoSaveTimer = null;
+
+  function getFormData() {
+    const data = {};
+
+    textFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.value;
+    });
+
+    radioFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+
+    checkboxFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) data[id] = el.checked;
+    });
+
+    data.savedAt = new Date().toISOString();
+    return data;
+  }
+
+  function setFormData(data) {
+    textFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.value = data[id];
+    });
+
+    radioFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+
+    checkboxFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && data[id] !== undefined) el.checked = data[id];
+    });
+  }
+
+  function autoSave() {
+    const data = getFormData();
+    try {
+      localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(data));
+      updateSaveStatus('Auto-saved at ' + new Date().toLocaleTimeString(), 'saved');
+    } catch (e) {
+      console.error('Auto-save failed:', e);
+      updateSaveStatus('Auto-save failed', 'error');
+    }
+  }
+
+  function loadAutoSave() {
+    const saved = localStorage.getItem(AUTOSAVE_KEY);
+    if (saved) {
+      try {
+        const data = JSON.parse(saved);
+        setFormData(data);
+        const savedTime = new Date(data.savedAt).toLocaleString();
+        updateSaveStatus('Restored from ' + savedTime, 'saved');
+        showToast('Previous work restored!', 'success');
+      } catch (e) {
+        console.error('Failed to load auto-save:', e);
+        showToast('Could not restore previous work', 'error');
+      }
+    }
+  }
+
+  function updateSaveStatus(message, state) {
+    const status = document.getElementById('saveStatus');
+    status.textContent = message;
+    status.className = 'save-status ' + (state || '');
+  }
+
+  function setupAutoSave() {
+    const form = document.getElementById('formPage');
+
+    form.addEventListener('input', () => {
+      updateSaveStatus('Saving...', 'saving');
+      clearTimeout(autoSaveTimer);
+      autoSaveTimer = setTimeout(autoSave, 1500);
+    });
+
+    form.addEventListener('change', () => {
+      updateSaveStatus('Saving...', 'saving');
+      clearTimeout(autoSaveTimer);
+      autoSaveTimer = setTimeout(autoSave, 500);
+    });
+  }
+
+  // ============================================
+  // FILE SLOTS (1–8)
+  // ============================================
+  function getCurrentSlotKey() {
+    const select = document.getElementById('fileSlotSelect');
+    const slotNumber = select ? select.value : '1';
+    return SLOT_KEY_BASE + slotNumber;
+  }
+
+  function saveToSlot() {
+    const key = getCurrentSlotKey();
+    const data = getFormData();
+    data.savedAt = new Date().toISOString();
+
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+      const slotNum = document.getElementById('fileSlotSelect').value;
+      showToast('Saved to File ' + slotNum, 'success');
+    } catch (e) {
+      console.error('Slot save failed:', e);
+      showToast('Could not save to this slot.', 'error');
+    }
+  }
+
+  function loadFromSlot() {
+    const key = getCurrentSlotKey();
+    const raw = localStorage.getItem(key);
+    const slotNum = document.getElementById('fileSlotSelect').value;
+
+    if (!raw) {
+      showToast('No data stored in File ' + slotNum, 'info');
+      return;
+    }
+
+    if (!confirm('Load File ' + slotNum + ' and replace the current form?')) {
+      return;
+    }
+
+    try {
+      const data = JSON.parse(raw);
+      setFormData(data);
+      showToast('Loaded File ' + slotNum, 'success');
+      autoSave();
+    } catch (e) {
+      console.error('Slot load failed:', e);
+      showToast('Could not load from this slot.', 'error');
+    }
+  }
+
+  // ============================================
+  // CLEAR FORM
+  // ============================================
+  function clearForm() {
+    if (!confirm('Are you sure you want to clear the form? This will erase all current data.')) {
+      return;
+    }
+
+    textFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        if (el.tagName === 'SELECT') {
+          el.selectedIndex = currentWeekIndex;
+        } else {
+          el.value = '';
+        }
+      }
+    });
+
+    radioFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.checked = false;
+    });
+
+    checkboxFields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.checked = false;
+    });
+
+    localStorage.removeItem(AUTOSAVE_KEY);
+    updateSaveStatus('Form cleared', '');
+    showToast('Form cleared!', 'info');
+  }
+
+  // ============================================
+  // 2. SAVE & LOAD PREVIOUS WEEKS
+  // ============================================
+  function getSavedWeeks() {
+    try {
+      const saved = localStorage.getItem(SAVED_WEEKS_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch (e) {
+      console.error('Failed to get saved weeks:', e);
+      return [];
+    }
+  }
+
+  function saveWeeks(weeks) {
+    try {
+      localStorage.setItem(SAVED_WEEKS_KEY, JSON.stringify(weeks));
+    } catch (e) {
+      console.error('Failed to save weeks:', e);
+      showToast('Failed to save. Storage may be full.', 'error');
+    }
+  }
+
+  function saveCurrentWeek() {
+    const data = getFormData();
+    const weekSelect = document.getElementById('weekSelect');
+    const weekOf = weekSelect.value;
+    const weekDisplay = weekSelect.options[weekSelect.selectedIndex].text;
+    const teacherName = document.getElementById('teacherName').value || 'Unknown Teacher';
+
+    const weekData = {
+      id: Date.now(),
+      weekOf: weekOf,
+      weekDisplay: weekDisplay,
+      teacherName: teacherName,
+      savedAt: new Date().toISOString(),
+      data: data
+    };
+
+    let weeks = getSavedWeeks();
+
+    const existingIndex = weeks.findIndex(w => w.weekOf === weekOf);
+    if (existingIndex >= 0) {
+      if (!confirm('A saved form for this week already exists. Do you want to overwrite it?')) {
+        return;
+      }
+      weeks[existingIndex] = weekData;
+    } else {
+      weeks.unshift(weekData);
+    }
+
+    weeks = weeks.slice(0, 20);
+    saveWeeks(weeks);
+
+    showToast('Week saved successfully!', 'success');
+  }
+
+  function showSavedWeeks() {
+    const weeks = getSavedWeeks();
+    const list = document.getElementById('savedWeeksList');
+
+    if (weeks.length === 0) {
+      list.innerHTML = '<div class="no-weeks-message">No saved weeks yet.<br>Save your current form first!</div>';
+    } else {
+      list.innerHTML = weeks.map(week => `
+        <div class="saved-week-item" onclick="loadWeek(${week.id})">
+          <div class="week-info">
+            <div class="week-date">${escapeHtml(week.weekDisplay)}</div>
+            <div class="week-teacher">${escapeHtml(week.teacherName)} • Saved ${new Date(week.savedAt).toLocaleDateString()}</div>
+          </div>
+          <button class="delete-btn" onclick="event.stopPropagation(); deleteWeek(${week.id})">Delete</button>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('savedWeeksModal').classList.add('show');
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function closeModal() {
+    document.getElementById('savedWeeksModal').classList.remove('show');
+  }
+
+  function loadWeek(id) {
+    const weeks = getSavedWeeks();
+    const week = weeks.find(w => w.id === id);
+
+    if (week && week.data) {
+      if (confirm('This will replace your current form data. Continue?')) {
+        setFormData(week.data);
+        closeModal();
+        showToast('Week loaded successfully!', 'success');
+        autoSave();
+      }
+    } else {
+      showToast('Could not load week data', 'error');
+    }
+  }
+
+  function deleteWeek(id) {
+    if (confirm('Delete this saved week?')) {
+      let weeks = getSavedWeeks();
+      weeks = weeks.filter(w => w.id !== id);
+      saveWeeks(weeks);
+      showSavedWeeks();
+      showToast('Week deleted', 'info');
+    }
+  }
+
+  // ============================================
+  // 3. EXPORT FUNCTIONS
+  // ============================================
+  function generateTextContent() {
+    const getValue = (id) => {
+      const el = document.getElementById(id);
+      if (!el) return '(not filled)';
+      return el.value.trim() || '(not filled)';
+    };
+
+    const getChecked = (id) => {
+      const el = document.getElementById(id);
+      if (!el) return '☐';
+      return el.checked ? '✓' : '☐';
+    };
+
+    const weekSelect = document.getElementById('weekSelect');
+    const weekText = weekSelect.options[weekSelect.selectedIndex].text;
+
+    let text = `
+═══════════════════════════════════════════════════════════════
+              LINKS ENGLISH LANGUAGE INSTITUTE
+           Weekly Lesson Preparation & Evidence Form
+═══════════════════════════════════════════════════════════════
+
+BASIC INFORMATION
+─────────────────────────────────────────────────────────────────
+Teacher Name:  ${getValue('teacherName')}
+Week:          ${weekText}
+Level:         ${getValue('level')}
+
+WEEKLY LEARNING GOALS
+─────────────────────────────────────────────────────────────────
+By the end of this week, students will be able to:
+1. ${getValue('goal1')}
+2. ${getValue('goal2')}
+3. ${getValue('goal3')}
+
+EVIDENCE OF PREPARATION
+─────────────────────────────────────────────────────────────────
+Lesson planning completed in advance?  ${getChecked('planningYes')} Yes  ${getChecked('planningNo')} No
+
+Textbook units/pages prepared:
+${getValue('textbookUnits')}
+
+Lesson plan notes / outline:
+${getValue('lessonNotes')}
+
+SUPPLEMENTAL / EXTRA MATERIALS USED
+─────────────────────────────────────────────────────────────────
+${getChecked('matWorksheets')} Teacher-created worksheets
+${getChecked('matAuthentic')} Authentic materials (articles, menus, ads, forms, etc.)
+${getChecked('matVideo')} Video / Audio (YouTube, podcast, listening track)
+${getChecked('matGames')} Games / Speaking cards / Role-plays
+${getChecked('matOnline')} Online tools / apps
+
+Details / links / file names:
+${getValue('materialDetails')}
+
+WEEKLY BREAKDOWN
+═══════════════════════════════════════════════════════════════
+
+MONDAY
+─────────────────────────────────────────────────────────────────
+Objective:
+${getValue('monObjective')}
+
+Main Activities:
+${getValue('monActivities')}
+
+Extra Material Used:
+${getValue('monMaterials')}
+
+TUESDAY
+─────────────────────────────────────────────────────────────────
+Objective:
+${getValue('tueObjective')}
+
+Main Activities:
+${getValue('tueActivities')}
+
+Extra Material Used:
+${getValue('tueMaterials')}
+
+WEDNESDAY
+─────────────────────────────────────────────────────────────────
+Objective:
+${getValue('wedObjective')}
+
+Main Activities:
+${getValue('wedActivities')}
+
+Extra Material Used:
+${getValue('wedMaterials')}
+
+THURSDAY
+─────────────────────────────────────────────────────────────────
+Objective:
+${getValue('thuObjective')}
+
+Main Activities:
+${getValue('thuActivities')}
+
+Extra Material Used:
+${getValue('thuMaterials')}
+
+PRIMARY SKILL FOCUS
+─────────────────────────────────────────────────────────────────
+${getChecked('skillSpeaking')} Speaking    ${getChecked('skillListening')} Listening    ${getChecked('skillReading')} Reading    ${getChecked('skillWriting')} Writing
+${getChecked('skillGrammar')} Grammar     ${getChecked('skillPronunciation')} Pronunciation  ${getChecked('skillVocabulary')} Vocabulary
+
+ASSESSMENT & MONITORING
+─────────────────────────────────────────────────────────────────
+How was student learning checked this week?
+${getChecked('assessObservation')} Observation  ${getChecked('assessSpeaking')} Speaking task  ${getChecked('assessQuiz')} Quiz  ${getChecked('assessWriting')} Writing task  ${getChecked('assessParticipation')} Participation
+
+Common errors or challenges observed:
+${getValue('commonErrors')}
+
+WEEKLY REFLECTION
+═══════════════════════════════════════════════════════════════
+
+What worked well this week?
+${getValue('workedWell')}
+
+What adjustments are needed for next week?
+${getValue('adjustments')}
+
+Notes for academic coordinator / next instructor:
+${getValue('coordinatorNotes')}
+
+═══════════════════════════════════════════════════════════════
+Generated: ${new Date().toLocaleString()}
+═══════════════════════════════════════════════════════════════
+`;
+    return text.trim();
+  }
+
+  function emailForm() {
+    const teacherName = document.getElementById('teacherName').value || 'Teacher';
+    const weekSelect = document.getElementById('weekSelect');
+    const weekText = weekSelect.options[weekSelect.selectedIndex].text;
+
+    const subject = encodeURIComponent(`Weekly Lesson Plan - ${teacherName} - ${weekText}`);
+    const body = encodeURIComponent(generateTextContent());
+
+    const mailtoUrl = `mailto:?subject=${subject}&body=${body}`;
+
+    if (mailtoUrl.length > 1900) {
+      showToast('Form content is too long for email. Use "Copy to Clipboard" instead and paste into your email.', 'error');
+      return;
+    }
+
+    try {
+      window.location.href = mailtoUrl;
+      showToast('Opening email client...', 'info');
+    } catch (e) {
+      showToast('Could not open email client. Try "Copy to Clipboard" instead.', 'error');
+    }
+  }
+
+  function downloadAsText() {
+    const text = generateTextContent();
+    const teacherName = document.getElementById('teacherName').value || 'Teacher';
+    const weekOf = document.getElementById('weekSelect').value;
+
+    const safeName = teacherName.replace(/[^a-zA-Z0-9]/g, '_');
+
+    try {
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `LessonPlan_${safeName}_${weekOf}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      showToast('File downloaded!', 'success');
+    } catch (e) {
+      showToast('Download failed. Please try again.', 'error');
+      console.error('Download error:', e);
+    }
+  }
+
+  function copyToClipboard() {
+    const text = generateTextContent();
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Copied to clipboard!', 'success');
+      }).catch(err => {
+        console.error('Clipboard API failed:', err);
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    textarea.style.top = '0';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        showToast('Copied to clipboard!', 'success');
+      } else {
+        showToast('Failed to copy. Please select and copy manually.', 'error');
+      }
+    } catch (err) {
+      showToast('Failed to copy. Please try again.', 'error');
+      console.error('Fallback copy error:', err);
+    }
+
+    document.body.removeChild(textarea);
+  }
+
+  // ============================================
+  // INITIALIZE
+  // ============================================
+  document.addEventListener('DOMContentLoaded', function() {
+    populateWeekDropdown();
+    loadAutoSave();
+    setupAutoSave();
+
+    document.getElementById('savedWeeksModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
